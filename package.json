@@ -1,0 +1,22 @@
+{
+  "name": "sdk-template",
+  "version": "0.0.1",
+  "description": "a SDK template",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:shen2/node-sdk-template.git"
+  },
+  "author": {
+    "name": "shen2"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/shen2/node-sdk-template/issues"
+  },
+  "dependencies": {
+    "request": "*",
+    "underscore": "*"
+  }
+}
