@@ -7,6 +7,10 @@ var SDK = function(config) {
     this.config = config;
 };
 
+SDK.prototype.accessTokenUrl = function(){
+	return '{{access_token_url}}';
+};
+
 /**
  * 使用code换取access_token与用户ID
  */
@@ -16,7 +20,7 @@ SDK.prototype.auth = function(code, callback) {
     if (typeof(code) !== 'string')
     	return callback(new Error('code must be string'));
     
-    request.post('{{access_token_url}}', {
+    request.post(this.accessTokenUrl(), {
 	    	form : {
 	    		code: code,
 	    		client_id : this.config.app_key,
@@ -49,8 +53,12 @@ SDK.Client = function(access_token, app_key){
 	this.app_key = app_key;
 };
 
+SDK.Client.prototype.apiUrl = function(path){
+	return '{{api_endpoint}}' + path;
+};
+
 SDK.Client.prototype.get = function(path, data, callback){
-	var url = '{{api_endpoint}}' + path;
+	var url = this.apiUrl(path);
 		params = _.extend({
 			app_key		: this.app_key,
 			format		: 'json',
@@ -63,7 +71,7 @@ SDK.Client.prototype.get = function(path, data, callback){
 };
 
 SDK.Client.prototype.post = function(path, data, callback){
-	var url = '{{api_endpoint}}' + path,
+	var url = this.apiUrl(path),
 		params = _.extend({
 			app_key		: this.app_key,
 			format		: 'json',
